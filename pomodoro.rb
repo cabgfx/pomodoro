@@ -13,6 +13,10 @@ class PomodoroCLI < Thor
   option :break, aliases: '-b', type: :numeric, default: 5, desc: "Short break duration in minutes"
   option :longbreak, aliases: '-l', type: :numeric, default: 15, desc: "Long break duration in minutes"
 
+  def self.exit_on_failure?
+    true
+  end
+
   def pomo
     # Determine start and end times
     if options[:now]
