@@ -7,6 +7,7 @@ A simple command-line tool for calculating the number of Pomodoro sessions you c
 - Calculate the number of Pomodoro sessions for any given time range.
 - Flexible configuration for Pomodoro duration, short breaks, and long breaks.
 - Option to start from the current time and count forward by a specified number of hours.
+- Ability to customize the number of Pomodoros per cycle.
 - Easy-to-use command-line interface using the Thor gem.
 
 ## Installation
@@ -20,7 +21,7 @@ gem install thor
 Clone this repository:
 
 ```bash
-git clone https://github.com/<your-username>/pomodoro-cli.git
+git clone https://github.com/cabgfx/pomodoro-cli.git
 cd pomodoro-cli
 ```
 
@@ -35,13 +36,13 @@ chmod +x pomodoro.rb
 Run the script from the command line with the required parameters:
 
 ```bash
-ruby pomodoro.rb pomo -s <start time> -e <end time> -d <pomodoro duration> -b <break duration> -l <long break duration>
+ruby pomodoro.rb pomo -s <start time> -e <end time> -d <pomodoro duration> -b <break duration> -l <long break duration> -c <pomodoros per cycle>
 ```
 
 Alternatively, you can start from the current time and count forward by a specified number of hours:
 
 ```bash
-ruby pomodoro.rb pomo -n <hours> -d <pomodoro duration> -b <break duration> -l <long break duration>
+ruby pomodoro.rb pomo -n <hours> -d <pomodoro duration> -b <break duration> -l <long break duration> -c <pomodoros per cycle>
 ```
 
 ### Options
@@ -52,30 +53,31 @@ ruby pomodoro.rb pomo -n <hours> -d <pomodoro duration> -b <break duration> -l <
 - `-d`, `--duration`: Duration of each Pomodoro in minutes (default: 20)
 - `-b`, `--break`: Duration of each short break in minutes (default: 5)
 - `-l`, `--longbreak`: Duration of each long break in minutes (default: 15)
+- `-c`, `--cycles`: Number of Pomodoros per cycle (default: 4)
 
 ### Examples
 
 1. **Start from specific times:**
 
-   To calculate the number of Pomodoros you can fit between 01:28 and 03:44, with 18-minute Pomodoros, 3-minute short breaks, and 15-minute long breaks:
+   To calculate the number of Pomodoros you can fit between 01:28 and 03:44, with 18-minute Pomodoros, 3-minute short breaks, 15-minute long breaks, and 4 Pomodoros per cycle:
 
    ```bash
-   ruby pomodoro.rb pomo -s 01:28 -e 03:44 -d 18 -b 3 -l 15
+   ruby pomodoro.rb pomo -s 01:28 -e 03:44 -d 18 -b 3 -l 15 -c 4
    ```
 
 2. **Start from now and count forward:**
 
-   To start from the current time and count 2.5 hours forward:
+   To start from the current time and count 2.5 hours forward, with 5 Pomodoros per cycle:
 
    ```bash
-   ruby pomodoro.rb pomo -n 2.5 -d 18 -b 3 -l 15
+   ruby pomodoro.rb pomo -n 2.5 -d 18 -b 3 -l 15 -c 5
    ```
 
 **Output:**
 
 ```
 Total time available: 150 minutes
-Cycle details: 3 pomodoros per cycle, 15-minute long break
+Cycle details: 5 pomodoros per cycle, 15-minute long break
 Calculation based on start time: 13:45 and end time: 16:15
 Result: You can fit 6 pomodoros into your available time from 13:45 to 16:15.
 ```
@@ -97,7 +99,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-If you have any questions or suggestions, feel free to open an issue or reach out to me directly at [your-email@example.com].
+If you have any questions or suggestions, feel free to open an issue or reach out to me directly at [hi@cabgfx.com].
 
 ## Acknowledgments
 

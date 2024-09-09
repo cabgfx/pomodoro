@@ -12,6 +12,7 @@ class PomodoroCLI < Thor
   option :duration, aliases: '-d', type: :numeric, default: 20, desc: "Pomodoro duration in minutes"
   option :break, aliases: '-b', type: :numeric, default: 5, desc: "Short break duration in minutes"
   option :longbreak, aliases: '-l', type: :numeric, default: 15, desc: "Long break duration in minutes"
+  option :cycles, aliases: '-c', type: :numeric, default: 4, desc: "Number of Pomodoros per cycle (default: 4)"
 
   def self.exit_on_failure?
     true
@@ -40,9 +41,10 @@ class PomodoroCLI < Thor
     pomo_duration = options[:duration]
     break_duration = options[:break]
     longbreak_duration = options[:longbreak]
+    pomos_per_cycle = options[:cycles]
 
-    # Calculate time per cycle (3 Pomodoros + breaks)
-    cycle_time = (3 * pomo_duration) + (2 * break_duration) + longbreak_duration
+    # Calculate time per cycle (N Pomodoros + breaks)
+    cycle_time = (pomos_per_cycle * pomo_duration) + ((pomos_per_cycle - 1) * break_duration) + longbreak_duration
 
     # Calculate number of full cycles and remaining time
     full_cycles = total_minutes / cycle_time
@@ -52,11 +54,11 @@ class PomodoroCLI < Thor
     additional_pomos = remaining_minutes / (pomo_duration + break_duration)
 
     # Calculate total Pomodoros
-    total_pomodoros = (full_cycles * 3) + additional_pomos
+    total_pomodoros = (full_cycles * pomos_per_cycle) + additional_pomos
 
     # Output results
     puts "Total time available: #{total_minutes} minutes"
-    puts "Cycle details: 3 pomodoros per cycle, #{longbreak_duration}-minute long break"
+    puts "Cycle details: #{pomos_per_cycle} pomodoros per cycle, #{longbreak_duration}-minute long break"
     puts "Calculation based on start time: #{start_time.strftime('%H:%M')} and end time: #{end_time.strftime('%H:%M')}"
     puts "Result: You can fit #{total_pomodoros} pomodoros into your available time from #{start_time.strftime('%H:%M')} to #{end_time.strftime('%H:%M')}."
   end
