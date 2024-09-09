@@ -4,8 +4,9 @@ A simple command-line tool for calculating the number of Pomodoro sessions you c
 
 ## Features
 
-- Calculate the number of Pomodoro sessions for any given time period.
+- Calculate the number of Pomodoro sessions for any given time range.
 - Flexible configuration for Pomodoro duration, short breaks, and long breaks.
+- Option to start from the current time and count forward by a specified number of hours.
 - Easy-to-use command-line interface using the Thor gem.
 
 ## Installation
@@ -37,28 +38,46 @@ Run the script from the command line with the required parameters:
 ruby pomodoro.rb pomo -s <start time> -e <end time> -d <pomodoro duration> -b <break duration> -l <long break duration>
 ```
 
+Alternatively, you can start from the current time and count forward by a specified number of hours:
+
+```bash
+ruby pomodoro.rb pomo -n <hours> -d <pomodoro duration> -b <break duration> -l <long break duration>
+```
+
 ### Options
 
-- `-s`, `--start`: Start time in `HH:mm` format (required)
-- `-e`, `--end`: End time in `HH:mm` format (required)
+- `-s`, `--start`: Start time in `HH:mm` format (required unless using `-n`)
+- `-e`, `--end`: End time in `HH:mm` format (required unless using `-n`)
+- `-n`, `--now`: Number of hours from the current time (integer or float); takes priority over `-s` and `-e` (optional)
 - `-d`, `--duration`: Duration of each Pomodoro in minutes (default: 20)
 - `-b`, `--break`: Duration of each short break in minutes (default: 5)
 - `-l`, `--longbreak`: Duration of each long break in minutes (default: 15)
 
-### Example
+### Examples
 
-To calculate the number of Pomodoros you can fit between 23:12 and 02:53, with 18-minute Pomodoros, 3-minute short breaks, and 15-minute long breaks:
+1. **Start from specific times:**
 
-```bash
-ruby pomodoro.rb pomo -s 23:12 -e 02:53 -d 18 -b 3 -l 15
-```
+   To calculate the number of Pomodoros you can fit between 01:28 and 03:44, with 18-minute Pomodoros, 3-minute short breaks, and 15-minute long breaks:
+
+   ```bash
+   ruby pomodoro.rb pomo -s 01:28 -e 03:44 -d 18 -b 3 -l 15
+   ```
+
+2. **Start from now and count forward:**
+
+   To start from the current time and count 2.5 hours forward:
+
+   ```bash
+   ruby pomodoro.rb pomo -n 2.5 -d 18 -b 3 -l 15
+   ```
 
 **Output:**
 
 ```
-Total time available: 221 minutes
+Total time available: 150 minutes
 Cycle details: 3 pomodoros per cycle, 15-minute long break
-Result: You can fit 9 pomodoros into your available time from 23:12 to 02:53.
+Calculation based on start time: 13:45 and end time: 16:15
+Result: You can fit 6 pomodoros into your available time from 13:45 to 16:15.
 ```
 
 ## Contributing
@@ -78,7 +97,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-If you have any questions or suggestions, feel free to open an issue or reach out to me directly at [hi@cabgfx.com].
+If you have any questions or suggestions, feel free to open an issue or reach out to me directly at [your-email@example.com].
 
 ## Acknowledgments
 
