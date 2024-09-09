@@ -47,8 +47,8 @@ ruby pomodoro.rb pomo -n <hours> -d <pomodoro duration> -b <break duration> -l <
 
 ### Options
 
-- `-s`, `--start`: Start time in `HH:mm` format (required unless using `-n`)
-- `-e`, `--end`: End time in `HH:mm` format (required unless using `-n`)
+- `-s`, `--start`: Start time in `HH:mm` format (24-hour clock, required unless using `-n`)
+- `-e`, `--end`: End time in `HH:mm` format (24-hour clock, required unless using `-n`)
 - `-n`, `--now`: Number of hours from the current time (integer or float); takes priority over `-s` and `-e` (optional)
 - `-d`, `--duration`: Duration of each Pomodoro in minutes (default: 20)
 - `-b`, `--break`: Duration of each short break in minutes (default: 5)
