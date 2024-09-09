@@ -6,8 +6,8 @@ require 'time'
 class PomodoroCLI < Thor
   desc "pomo", "Calculate the number of Pomodoros within a given time range"
 
-  option :start, aliases: '-s', type: :string, desc: "Start time (HH:mm)"
-  option :end, aliases: '-e', type: :string, desc: "End time (HH:mm)"
+  option :start, aliases: '-s', type: :string, desc: "Start time (HH:mm, 24-hour clock)"
+  option :end, aliases: '-e', type: :string, desc: "End time (HH:mm, 24-hour clock)"
   option :now, aliases: '-n', type: :numeric, desc: "Start from now and count N hours forward"
   option :duration, aliases: '-d', type: :numeric, default: 20, desc: "Pomodoro duration in minutes"
   option :break, aliases: '-b', type: :numeric, default: 5, desc: "Short break duration in minutes"
