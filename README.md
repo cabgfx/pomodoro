@@ -47,7 +47,7 @@ ruby pomodoro.rb pomo -n <hours> -d <pomodoro duration> -b <break duration> -l <
 
 ### Options
 
-- `-s`, `--start`: Start time in `HH:mm` format (24-hour clock, required unless using `-n`)
+- `-s`, `--start`: Start time in `HH:mm` format (24-hour clock, optional; defaults to current time when using `-e`)
 - `-e`, `--end`: End time in `HH:mm` format (24-hour clock, required unless using `-n`)
 - `-n`, `--now`: Number of hours from the current time (integer or float); takes priority over `-s` and `-e` (optional)
 - `-d`, `--duration`: Duration of each Pomodoro in minutes (default: 20)
@@ -59,27 +59,42 @@ ruby pomodoro.rb pomo -n <hours> -d <pomodoro duration> -b <break duration> -l <
 
 1. **Start from specific times:**
 
-   To calculate the number of Pomodoros you can fit between 01:28 and 03:44, with 18-minute Pomodoros, 3-minute short breaks, 15-minute long breaks, and 4 Pomodoros per cycle:
+   To calculate the number of Pomodoros you can fit between 14:11 and 23:19, with 18-minute Pomodoros, 3-minute short breaks, 22-minute long breaks, and 6 Pomodoros per cycle:
 
    ```bash
-   ruby pomodoro.rb pomo -s 01:28 -e 03:44 -d 18 -b 3 -l 15 -c 4
+   ruby pomodoro.rb pomo -s 14:11 -e 23:19 -d 18 -b 3 -l 22 -c 6
    ```
+
+**Output:**
+
+```
+Total time available: 242 minutes
+Cycle details: 6 pomodoros per cycle, 22-minute long break
+Calculation based on start time: 19:16 and end time: 23:19
+Result: You can fit 10 pomodoros into your available time from 19:16 to 23:19.
+```
 
 2. **Start from now and count forward:**
 
-   To start from the current time and count 2.5 hours forward, with 5 Pomodoros per cycle:
+   To start from the current time (19:18 in this example) and count 2.5 hours forward, using just the default values:
 
    ```bash
-   ruby pomodoro.rb pomo -n 2.5 -d 18 -b 3 -l 15 -c 5
+   ruby pomodoro.rb pomo -n 2.5
+   ```
+
+   or
+
+   ```bash
+   ruby pomodoro.rb pomo -e 21:48
    ```
 
 **Output:**
 
 ```
 Total time available: 150 minutes
-Cycle details: 5 pomodoros per cycle, 15-minute long break
-Calculation based on start time: 13:45 and end time: 16:15
-Result: You can fit 6 pomodoros into your available time from 13:45 to 16:15.
+Cycle details: 4 pomodoros per cycle, 15-minute long break
+Calculation based on start time: 19:18 and end time: 21:48
+Result: You can fit 5 pomodoros into your available time from 19:18 to 21:48.
 ```
 
 ## Contributing

@@ -6,12 +6,12 @@ require 'time'
 class PomodoroCLI < Thor
   desc "pomo", "Calculate the number of Pomodoros within a given time range"
 
-  option :start, aliases: '-s', type: :string, desc: "Start time (HH:mm, 24-hour clock)"
-  option :end, aliases: '-e', type: :string, desc: "End time (HH:mm, 24-hour clock)"
+  option :start, aliases: '-s', type: :string, desc: "Start time (HH:mm, 24-hour clock). If not provided, the current time will be used."
+  option :end, aliases: '-e', type: :string, desc: "End time (HH:mm, 24-hour clock). Required unless using -n option."
   option :now, aliases: '-n', type: :numeric, desc: "Start from now and count N hours forward"
-  option :duration, aliases: '-d', type: :numeric, default: 20, desc: "Pomodoro duration in minutes"
-  option :break, aliases: '-b', type: :numeric, default: 5, desc: "Short break duration in minutes"
-  option :longbreak, aliases: '-l', type: :numeric, default: 15, desc: "Long break duration in minutes"
+  option :duration, aliases: '-d', type: :numeric, default: 20, desc: "Pomodoro duration in minutes (default: 20)"
+  option :break, aliases: '-b', type: :numeric, default: 5, desc: "Short break duration in minutes (default: 5)"
+  option :longbreak, aliases: '-l', type: :numeric, default: 15, desc: "Long break duration in minutes (default: 15)"
   option :cycles, aliases: '-c', type: :numeric, default: 4, desc: "Number of Pomodoros per cycle (default: 4)"
 
   def self.exit_on_failure?
@@ -23,14 +23,14 @@ class PomodoroCLI < Thor
     if options[:now]
       start_time = Time.now
       end_time = start_time + (options[:now] * 3600) # Convert hours to seconds
-    elsif options[:start] && options[:end]
-      start_time = Time.parse(options[:start])
+    elsif options[:end]
+      start_time = Time.now
       end_time = Time.parse(options[:end])
 
       # Handle the case where the end time is on the next day
       end_time += 86400 if end_time < start_time # Add 24 hours in seconds
     else
-      puts "Error: You must provide either -n (--now) or both -s (--start) and -e (--end)."
+      puts "Error: You must provide either -n (--now) or -e (--end)."
       exit(1)
     end
 
